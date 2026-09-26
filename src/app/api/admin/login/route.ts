@@ -4,9 +4,17 @@ export async function POST(request: NextRequest) {
   try {
     const { email, password } = await request.json();
 
-    // The password is read securely from the environment variable in Vercel
-    const configuredPassword = process.env.ADMIN_PASSWORD || "KarAdmin2026!";
+    // The password is read strictly from the environment variable in Vercel
+    const configuredPassword = process.env.ADMIN_PASSWORD;
     const configuredEmail = (process.env.ADMIN_EMAIL || "admin@karstore.shop").toLowerCase();
+
+    if (!configuredPassword) {
+      console.error("ADMIN_PASSWORD environment variable is not set");
+      return NextResponse.json(
+        { error: "Error de configuración en el servidor (falta ADMIN_PASSWORD)." },
+        { status: 500 }
+      );
+    }
 
     const inputEmail = String(email || "").trim().toLowerCase();
     const inputPass = String(password || "").trim();
