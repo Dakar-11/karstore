@@ -1,0 +1,516 @@
+[
+  {
+    "name": "hombre",
+    "price": 200,
+    "image": "/images/alpaca_poncho.jpg",
+    "category": "Ponchos",
+    "branch": "hombre",
+    "gender": "hombre",
+    "description": "Artesanía de alpaca peruana premium hecha a mano.",
+    "material": "100% Baby Alpaca",
+    "badge": "NEW",
+    "tags": [
+      "hombre",
+      "ponchos"
+    ],
+    "colors": [
+      "Natural",
+      "Terracota",
+      "Gris"
+    ],
+    "sizes": [
+      "Estándar"
+    ],
+    "id": 22
+  },
+  {
+    "id": 1,
+    "name": "Alfombra Andina Tradicional",
+    "price": 389,
+    "image": "/images/alpaca_rug.jpg",
+    "category": "Alfombras",
+    "description": "Alfombra artesanal tejida a mano con fibra de alpaca premium. Diseño geométrico andino en tonos tierra. Ideal para sala o dormitorio.",
+    "material": "100% Fibra de Alpaca",
+    "badge": "NEW",
+    "colors": [
+      "Terracota",
+      "Natural",
+      "Gris"
+    ],
+    "sizes": [
+      "120x180cm",
+      "150x200cm",
+      "200x300cm"
+    ],
+    "tags": [
+      "alfombras",
+      "hogar"
+    ],
+    "gender": "unisex"
+  },
+  {
+    "id": 2,
+    "name": "Gorro Baby Alpaca Pompón",
+    "price": 79,
+    "image": "/images/baby_alpaca_hat.jpg",
+    "category": "Gorros",
+    "description": "Gorro tejido a mano en fibra Baby Alpaca, suave y cálido. Pompón decorativo. Perfecto para damas, bebés y niños.",
+    "material": "100% Baby Alpaca",
+    "badge": "NEW",
+    "colors": [
+      "Crema",
+      "Rosa Pálido",
+      "Celeste"
+    ],
+    "sizes": [
+      "Estándar Dama",
+      "0-6 meses",
+      "1-3 años"
+    ],
+    "tags": [
+      "mujer",
+      "accesorios",
+      "gorros"
+    ],
+    "gender": "mujer"
+  },
+  {
+    "id": 3,
+    "name": "Pantuflas Cuero de Alpaca Bebé",
+    "price": 65,
+    "image": "/images/alpaca_slippers.jpg",
+    "category": "Calzado",
+    "description": "Pantuflas artesanales de cuero genuino con forro de lana de alpaca. Suaves, cálidas y perfectas para los primeros pasos.",
+    "material": "Cuero + Lana de Alpaca",
+    "badge": "NEW",
+    "colors": [
+      "Camel",
+      "Chocolate",
+      "Natural"
+    ],
+    "sizes": [
+      "0-6 meses",
+      "6-12 meses",
+      "12-18 meses"
+    ],
+    "tags": [
+      "accesorios",
+      "calzado"
+    ],
+    "gender": "unisex"
+  },
+  {
+    "id": 4,
+    "name": "Bufanda Herringbone Camel",
+    "price": 129,
+    "original_price": 159,
+    "image": "/images/alpaca_scarf.jpg",
+    "category": "Bufandas",
+    "description": "Bufanda de alpaca con elegante patrón herringbone. Suave al tacto, ligera y extremadamente cálida. Un accesorio imprescindible unisex.",
+    "material": "100% Alpaca Superfina",
+    "badge": "20% DTO",
+    "colors": [
+      "Camel",
+      "Gris Oscuro",
+      "Burdeos"
+    ],
+    "tags": [
+      "mujer",
+      "hombre",
+      "accesorios",
+      "bufandas"
+    ],
+    "gender": "unisex"
+  },
+  {
+    "id": 5,
+    "name": "Guantes Alpaca Andinos",
+    "price": 59,
+    "image": "/images/alpaca_gloves.jpg",
+    "category": "Accesorios",
+    "description": "Guantes tejidos a mano con diseño geométrico andino. Fibra de alpaca que brinda calidez sin perder elegancia.",
+    "material": "100% Alpaca",
+    "colors": [
+      "Carbón",
+      "Negro",
+      "Gris Claro"
+    ],
+    "sizes": [
+      "S",
+      "M",
+      "L"
+    ],
+    "tags": [
+      "accesorios",
+      "hombre",
+      "mujer"
+    ],
+    "gender": "unisex"
+  },
+  {
+    "id": 6,
+    "name": "Manta Baby Alpaca Rayas",
+    "price": 249,
+    "original_price": 319,
+    "image": "/images/alpaca_blanket.jpg",
+    "category": "Mantas",
+    "description": "Manta throw de Baby Alpaca con rayas elegantes. Perfecta para el sofá o la cama. Suavidad incomparable.",
+    "material": "100% Baby Alpaca",
+    "badge": "22% DTO",
+    "colors": [
+      "Gris/Crema",
+      "Azul/Natural",
+      "Camel/Blanco"
+    ],
+    "tags": [
+      "alfombras",
+      "mantas",
+      "hogar"
+    ],
+    "gender": "unisex"
+  },
+  {
+    "id": 7,
+    "name": "Poncho Ancestral Terracota",
+    "price": 459,
+    "image": "/images/alpaca_poncho.jpg",
+    "category": "Ponchos",
+    "description": "Poncho ceremonial tejido artesanalmente con diseños ancestrales andinos. Pieza única de colección con caída fluida.",
+    "material": "100% Alpaca Premium",
+    "badge": "EXCLUSIVO",
+    "colors": [
+      "Terracota/Crema"
+    ],
+    "tags": [
+      "mujer",
+      "hombre",
+      "ponchos",
+      "destacado"
+    ],
+    "gender": "unisex"
+  },
+  {
+    "id": 8,
+    "name": "Sweater Cable Knit Navy",
+    "price": 199,
+    "image": "/images/alpaca_sweater.jpg",
+    "category": "Sweaters",
+    "description": "Sweater masculino de punto trenzado en Baby Alpaca. Elegante, cálido y versátil. Confeccionado a mano en los Andes peruanos.",
+    "material": "100% Baby Alpaca",
+    "colors": [
+      "Navy",
+      "Charcoal",
+      "Burgundy"
+    ],
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "tags": [
+      "hombre",
+      "sweaters"
+    ],
+    "gender": "hombre"
+  },
+  {
+    "id": 9,
+    "name": "Piel Curtida de Alpaca Natural",
+    "price": 349,
+    "image": "/images/alpaca_rug.jpg",
+    "category": "Pieles Curtidas",
+    "description": "Piel de alpaca curtida con proceso artesanal ecológico de mortalidad natural. Pelo largo, suave y brillante. Pieza exclusiva para decoración de interiores de lujo.",
+    "material": "100% Piel Natural de Alpaca",
+    "badge": "EXCLUSIVO",
+    "colors": [
+      "Blanco Puro",
+      "Camel",
+      "Gris Andino"
+    ],
+    "sizes": [
+      "Estándar (~110x85cm)"
+    ],
+    "tags": [
+      "pieles-curtidas",
+      "hogar",
+      "exclusivo"
+    ],
+    "gender": "unisex"
+  },
+  {
+    "id": 10,
+    "name": "Ruana Andina Baby Alpaca Marfil",
+    "price": 429,
+    "image": "/images/alpaca_poncho.jpg",
+    "category": "Ponchos",
+    "description": "Ruana femenina de corte envolvente confeccionada en fibra pura Baby Alpaca. Elegancia sutil con flecos trenzados a mano.",
+    "material": "100% Baby Alpaca",
+    "badge": "NEW",
+    "colors": [
+      "Marfil",
+      "Vicuña Natural",
+      "Gris Nube"
+    ],
+    "sizes": [
+      "Talla Única"
+    ],
+    "tags": [
+      "mujer",
+      "ponchos",
+      "destacado"
+    ],
+    "gender": "mujer"
+  },
+  {
+    "id": 11,
+    "name": "Chalina Seda y Baby Alpaca Dama",
+    "price": 149,
+    "image": "/images/alpaca_scarf.jpg",
+    "category": "Bufandas",
+    "description": "Mezcla sedosa de 70% Baby Alpaca y 30% seda natural peruana. Brillo delicado y ligereza excepcional para ocasiones especiales.",
+    "material": "70% Baby Alpaca, 30% Seda",
+    "badge": "EDICIÓN LIMITADA",
+    "colors": [
+      "Rosa Andino",
+      "Oro Suave",
+      "Perla"
+    ],
+    "tags": [
+      "mujer",
+      "bufandas",
+      "accesorios"
+    ],
+    "gender": "mujer"
+  },
+  {
+    "id": 12,
+    "name": "Chompa Cuello V Baby Alpaca Dama",
+    "price": 229,
+    "image": "/images/alpaca_sweater.jpg",
+    "category": "Sweaters",
+    "description": "Chompa femenina de silueta contemporánea tejida en punto fino de Baby Alpaca. Suavidad directa sobre la piel sin causar picazón.",
+    "material": "100% Baby Alpaca",
+    "colors": [
+      "Avena",
+      "Terracota Claro",
+      "Negro"
+    ],
+    "sizes": [
+      "XS",
+      "S",
+      "M",
+      "L"
+    ],
+    "tags": [
+      "mujer",
+      "sweaters"
+    ],
+    "gender": "mujer"
+  },
+  {
+    "id": 13,
+    "name": "Cardigan Alpaca Clásico Charcoal",
+    "price": 289,
+    "image": "/images/alpaca_sweater.jpg",
+    "category": "Sweaters",
+    "description": "Cardigan con botones de madera tallada a mano y cuello chal para caballero. El equilibrio perfecto entre estilo formal y abrigo andino.",
+    "material": "100% Baby Alpaca",
+    "badge": "PREMIUM",
+    "colors": [
+      "Charcoal",
+      "Tierra Quemada",
+      "Azul Noche"
+    ],
+    "sizes": [
+      "M",
+      "L",
+      "XL"
+    ],
+    "tags": [
+      "hombre",
+      "sweaters"
+    ],
+    "gender": "hombre"
+  },
+  {
+    "id": 14,
+    "name": "Poncho Andino Minimalista Eclipse",
+    "price": 469,
+    "image": "/images/alpaca_poncho.jpg",
+    "category": "Ponchos",
+    "description": "Poncho masculino de corte recto y líneas sobrias. Confeccionado en telar tradicional con fibra de alpaca gruesa seleccionada.",
+    "material": "100% Alpaca Seleccionada",
+    "badge": "EXCLUSIVO",
+    "colors": [
+      "Negro Carbón",
+      "Gris Ceniza"
+    ],
+    "sizes": [
+      "Talla Única"
+    ],
+    "tags": [
+      "hombre",
+      "ponchos"
+    ],
+    "gender": "hombre"
+  },
+  {
+    "id": 15,
+    "name": "Bufanda Gruesa Alpaca Ribbed",
+    "price": 139,
+    "image": "/images/alpaca_scarf.jpg",
+    "category": "Bufandas",
+    "description": "Bufanda masculina con textura en punto rib inglés. Máximo aislamiento térmico contra el frío extremo con tacto suntuoso.",
+    "material": "100% Alpaca Superfina",
+    "colors": [
+      "Gris Jaspeado",
+      "Verde Musgo",
+      "Azul Marino"
+    ],
+    "tags": [
+      "hombre",
+      "accesorios",
+      "bufandas"
+    ],
+    "gender": "hombre"
+  },
+  {
+    "id": 16,
+    "name": "Alfombra Geométrica Cusco Imperial",
+    "price": 589,
+    "image": "/images/alpaca_rug.jpg",
+    "category": "Alfombras",
+    "description": "Gran alfombra de piso tejida a mano con patrones de la chakana andina. Alta densidad de hebras que asegura durabilidad por décadas.",
+    "material": "100% Fibra Pura de Alpaca",
+    "badge": "MAESTRÍA",
+    "colors": [
+      "Monocromático Natural",
+      "Tierra y Ceniza"
+    ],
+    "sizes": [
+      "180x240cm",
+      "200x300cm"
+    ],
+    "tags": [
+      "alfombras",
+      "hogar",
+      "exclusivo"
+    ],
+    "gender": "unisex"
+  },
+  {
+    "id": 17,
+    "name": "Tapiz Telar Andino Ayacuchano",
+    "price": 329,
+    "image": "/images/alpaca_rug.jpg",
+    "category": "Alfombras",
+    "description": "Tapiz artesanal multifuncional: apto para pie de cama o colgado en pared. Tintes 100% naturales obtenidos de plantas y minerales andinos.",
+    "material": "100% Lana de Alpaca",
+    "colors": [
+      "Tintes Naturales Andinos"
+    ],
+    "sizes": [
+      "100x160cm"
+    ],
+    "tags": [
+      "alfombras",
+      "hogar"
+    ],
+    "gender": "unisex"
+  },
+  {
+    "id": 18,
+    "name": "Pantuflas Unisex Cuero Alpaca Adulto",
+    "price": 119,
+    "image": "/images/alpaca_slippers.jpg",
+    "category": "Calzado",
+    "description": "Pantuflas para adulto de cuero de badana genuino y forro completo de lana de alpaca esponjosa. Máximo confort térmico para el hogar.",
+    "material": "Cuero Genuino + Vellón de Alpaca",
+    "badge": "BEST SELLER",
+    "colors": [
+      "Camel",
+      "Café Moro",
+      "Arena"
+    ],
+    "sizes": [
+      "36-38",
+      "39-41",
+      "42-44"
+    ],
+    "tags": [
+      "accesorios",
+      "calzado",
+      "hombre",
+      "mujer"
+    ],
+    "gender": "unisex"
+  },
+  {
+    "id": 19,
+    "name": "Piel Curtida Alpaca Camel Inti",
+    "price": 369,
+    "image": "/images/alpaca_rug.jpg",
+    "category": "Pieles Curtidas",
+    "description": "Piel seleccionada en tono camel dorado natural. Suavidad densa y pelo largo lustroso. Pieza de colección irrepetible para ambientes de lujo.",
+    "material": "100% Piel Natural de Alpaca",
+    "badge": "PIEZA ÚNICA",
+    "colors": [
+      "Camel Inti"
+    ],
+    "sizes": [
+      "Grande (~120x90cm)"
+    ],
+    "tags": [
+      "pieles-curtidas",
+      "hogar",
+      "exclusivo"
+    ],
+    "gender": "unisex"
+  },
+  {
+    "id": 20,
+    "name": "Cojín Pelo Largo Baby Alpaca Royal",
+    "price": 189,
+    "image": "/images/alpaca_blanket.jpg",
+    "category": "Pieles Curtidas",
+    "description": "Cojín decorativo tapizado con piel de alpaca de pelo extra largo en la cara frontal y terciopelo al reverso. Tacto celestial.",
+    "material": "Cara 100% Piel de Alpaca / Reverso Terciopelo",
+    "badge": "LUJO",
+    "colors": [
+      "Blanco Nieve",
+      "Vicuña"
+    ],
+    "sizes": [
+      "45x45cm",
+      "50x50cm"
+    ],
+    "tags": [
+      "pieles-curtidas",
+      "hogar"
+    ],
+    "gender": "unisex"
+  },
+  {
+    "id": 21,
+    "name": "Alfombra Circular Piel de Alpaca",
+    "price": 689,
+    "image": "/images/alpaca_rug.jpg",
+    "category": "Pieles Curtidas",
+    "description": "Alfombra circular de 140cm de diámetro confeccionada a mano uniendo cortes de piel de alpaca de tonalidad homogénea.",
+    "material": "100% Piel de Alpaca Seleccionada",
+    "badge": "ALTA DECORACIÓN",
+    "colors": [
+      "Blanco Marfil"
+    ],
+    "sizes": [
+      "140cm Diámetro"
+    ],
+    "tags": [
+      "pieles-curtidas",
+      "alfombras",
+      "exclusivo"
+    ],
+    "gender": "unisex"
+  }
+]

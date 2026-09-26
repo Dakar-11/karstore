@@ -1,0 +1,133 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply font-sans text-earth-950 bg-earth-50 antialiased;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply inline-flex items-center justify-center px-8 py-3 bg-earth-950 text-white text-sm font-medium tracking-wider uppercase transition-all duration-300 hover:bg-brand-700 hover:shadow-lg hover:shadow-brand-700/20;
+  }
+
+  .btn-outline {
+    @apply inline-flex items-center justify-center px-8 py-3 border border-earth-950 text-earth-950 text-sm font-medium tracking-wider uppercase transition-all duration-300 hover:bg-earth-950 hover:text-white;
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center justify-center px-6 py-2 text-earth-700 text-sm font-medium tracking-wide transition-all duration-300 hover:text-brand-600;
+  }
+
+  .product-card {
+    @apply relative overflow-hidden bg-white transition-all duration-500;
+  }
+
+  .product-card:hover .product-image {
+    @apply scale-105;
+  }
+
+  .product-card:hover .product-overlay {
+    @apply opacity-100;
+  }
+
+  .product-image {
+    @apply transition-transform duration-700 ease-out;
+  }
+
+  .product-overlay {
+    @apply absolute inset-0 bg-black/10 opacity-0 transition-opacity duration-500;
+  }
+
+  .section-title {
+    @apply font-display text-3xl md:text-4xl lg:text-5xl font-medium tracking-tight text-earth-950;
+  }
+
+  .section-subtitle {
+    @apply text-earth-600 text-base md:text-lg font-light tracking-wide max-w-2xl;
+  }
+
+  .nav-link {
+    @apply text-xs font-medium tracking-[0.2em] uppercase text-earth-700 transition-colors duration-300 hover:text-brand-600 relative;
+  }
+
+  .nav-link::after {
+    @apply content-[''] absolute bottom-0 left-0 w-0 h-[1px] bg-brand-600 transition-all duration-300;
+  }
+
+  .nav-link:hover::after {
+    @apply w-full;
+  }
+
+  .badge-new {
+    @apply absolute top-4 left-4 px-3 py-1 bg-earth-950 text-white text-[10px] font-semibold tracking-[0.15em] uppercase z-10;
+  }
+
+  .badge-discount {
+    @apply absolute top-4 left-4 px-3 py-1 bg-brand-600 text-white text-[10px] font-semibold tracking-[0.15em] uppercase z-10;
+  }
+
+  .glass-card {
+    @apply bg-white/80 backdrop-blur-xl border border-white/20 shadow-lg;
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-brand-600 to-warm-600;
+  }
+
+  .animate-stagger-1 { animation-delay: 0.1s; }
+  .animate-stagger-2 { animation-delay: 0.2s; }
+  .animate-stagger-3 { animation-delay: 0.3s; }
+  .animate-stagger-4 { animation-delay: 0.4s; }
+  .animate-stagger-5 { animation-delay: 0.5s; }
+  .animate-stagger-6 { animation-delay: 0.6s; }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f7f5f0;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c3b58f;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #a18c5e;
+}
+
+/* Cart slide animation */
+.cart-panel {
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Hero parallax text */
+.hero-text-shadow {
+  text-shadow: 0 2px 40px rgba(0, 0, 0, 0.3);
+}
+
+/* Smooth image loading */
+img {
+  transition: opacity 0.3s ease;
+}
