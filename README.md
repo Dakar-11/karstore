@@ -1,7 +1,3 @@
-# 🦙 QORI - Artesanías de Alpaca Premium
-
-Tienda e-commerce de artesanías hechas a mano con fibra de alpaca peruana.
-
 ## Tecnologías
 
 ### Frontend
@@ -119,11 +115,3 @@ karfront/
 │       └── categories.js        # Categorías
 └── package.json
 ```
-
-## Credenciales de prueba
-
-- **Admin**: admin@qori.pe / admin123
-
----
-
-Hecho con ❤️ en Perú 🇵🇪
