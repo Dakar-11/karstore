@@ -112,36 +112,42 @@ export default function AdminDashboard() {
     }
   }, []);
 
-  const handleLogin = (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoginError("");
     setLoginLoading(true);
 
-    setTimeout(() => {
+    try {
       const email = loginEmail.trim().toLowerCase();
       const password = loginPassword.trim();
 
-      // Pre-registered admin accounts
-      const isValidAdmin =
-        (email === "admin@kar.pe" || email === "admin@qori.pe" || email === "admin" || email === "admin@karstore.shop") &&
-        password === "KarAdmin2026!";
+      const res = await fetch("/api/admin/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      });
 
-      if (isValidAdmin) {
+      const data = await res.json();
+
+      if (res.ok && data.success) {
         localStorage.setItem(
           "kar_admin_session",
           JSON.stringify({
             authenticated: true,
-            user: email,
+            user: data.user,
             loginTime: new Date().toISOString(),
           })
         );
         setIsAuthenticated(true);
         showToast("Sesión iniciada como Administrador");
       } else {
-        setLoginError("Credenciales incorrectas. Verifica el correo y la contraseña.");
+        setLoginError(data.error || "Credenciales incorrectas. Verifica tu correo y contraseña.");
       }
+    } catch (err) {
+      setLoginError("Error de conexión al verificar credenciales.");
+    } finally {
       setLoginLoading(false);
-    }, 400);
+    }
   };
 
   const handleLogout = () => {
