@@ -123,8 +123,8 @@ export default function AdminDashboard() {
 
       // Pre-registered admin accounts
       const isValidAdmin =
-        (email === "admin@kar.pe" || email === "admin@qori.pe" || email === "admin") &&
-        password === "admin123";
+        (email === "admin@kar.pe" || email === "admin@qori.pe" || email === "admin" || email === "admin@karstore.shop") &&
+        password === "KarAdmin2026!";
 
       if (isValidAdmin) {
         localStorage.setItem(
@@ -382,10 +382,10 @@ export default function AdminDashboard() {
             <div className="mt-6 pt-5 border-t border-[#F0ECE3] bg-[#FAF8F5] -mx-8 -mb-8 p-4 text-[11px] text-[#78716C] rounded-b-sm">
               <div className="flex items-center gap-2 mb-1 text-[#1C1917] font-medium">
                 <Shield size={13} className="text-[#8C7A6B]" />
-                <span>Cuenta pre-registrada:</span>
+                <span>Acceso Administrativo Seguro</span>
               </div>
-              <p className="font-mono text-[10px] text-[#57534E]">
-                Usuario: <b>admin@kar.pe</b> / Clave: <b>admin123</b>
+              <p className="text-[11px] text-[#78716C]">
+                Ingresa con tu correo de administrador y tu contraseña segura.
               </p>
             </div>
           </div>

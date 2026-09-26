@@ -198,14 +198,14 @@ async function seed() {
     console.log("✅ Productos insertados");
 
     // Insert admin user
-    const adminPassword = await bcrypt.hash("admin123", 10);
+    const adminPassword = await bcrypt.hash("KarAdmin2026!", 10);
     await pool.query(
       `INSERT INTO users (first_name, last_name, email, password_hash, role) 
        VALUES ($1, $2, $3, $4, $5)
        ON CONFLICT (email) DO NOTHING`,
       ["Admin", "KAR", "admin@kar.pe", adminPassword, "admin"]
     );
-    console.log("✅ Usuario admin creado (admin@kar.pe / admin123)");
+    console.log("✅ Usuario admin creado (admin@kar.pe / KarAdmin2026!)");
 
     await pool.end();
     console.log("🎉 Seed completado exitosamente");
