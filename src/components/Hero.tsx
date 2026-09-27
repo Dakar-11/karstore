@@ -1,178 +1,177 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowDownRight } from "lucide-react";
 
 export default function Hero() {
+  const [loaded, setLoaded] = useState(false);
+  const [scrollY, setScrollY] = useState(0);
+
+  useEffect(() => {
+    setLoaded(true);
+    const handleScroll = () => setScrollY(window.scrollY);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const opacity = Math.max(0, 1 - scrollY / 500);
+  const parallax = scrollY * 0.25;
+
   return (
-    <section className="relative bg-[#F6F4EE] text-[#1C1917] overflow-hidden border-b border-[#E8E3D8]">
-      {/* Main Content Area */}
-      <div className="max-w-[1536px] mx-auto px-6 sm:px-10 lg:px-16 py-12 sm:py-16 md:py-20 lg:py-24">
-        <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 xl:gap-20 items-center">
-          {/* Left Column (7 cols): Typography & Actions */}
-          <div className="lg:col-span-7 flex flex-col justify-center">
-            {/* Subtle Origin Indicator */}
-            <div className="flex items-center gap-2 mb-4 sm:mb-5">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#8C7A6B]" />
-              <span className="text-[10px] sm:text-[11px] tracking-[0.28em] uppercase text-[#78716C] font-light">
-                Artesanía Textil de los Andes Peruanos
+    <section className="relative h-[100svh] min-h-[560px] sm:min-h-[660px] max-h-[1100px] overflow-hidden bg-[#0F0D0A]">
+      {/* ── Background Image with Parallax ── */}
+      <div
+        className="absolute inset-0 w-full h-[115%]"
+        style={{ transform: `translateY(-${parallax}px)` }}
+      >
+        <Image
+          src="/images/fondo_kar.png"
+          alt="Artesanía de alpaca premium - KAR"
+          fill
+          className={`object-cover object-center transition-all duration-[1.8s] ease-out ${
+            loaded ? "scale-100 opacity-100" : "scale-110 opacity-0"
+          }`}
+          sizes="100vw"
+          priority
+          quality={90}
+        />
+      </div>
+
+      {/* ── Cinematic Gradient Overlays ── */}
+      {/* Left gradient for text contrast */}
+      <div className="absolute inset-0 bg-gradient-to-r from-[#1a150e]/85 via-[#1a150e]/45 to-transparent sm:via-[#1a150e]/35" />
+      {/* Bottom gradient for depth */}
+      <div className="absolute inset-0 bg-gradient-to-t from-[#0F0D0A]/90 via-[#0F0D0A]/30 to-transparent" />
+      {/* Subtle tint */}
+      <div className="absolute inset-0 bg-[#0F0D0A]/15" />
+
+      {/* ── Main Content (Responsive for mobile & tablet) ── */}
+      <div
+        className="relative z-10 h-full flex flex-col justify-end pb-24 sm:pb-32 lg:pb-36"
+        style={{ opacity }}
+      >
+        <div className="w-full max-w-[1840px] mx-auto px-4 sm:px-8 lg:px-12">
+          {/* Origin Tag */}
+          <div
+            className={`flex items-center gap-2 sm:gap-3 mb-3 sm:mb-5 transition-all duration-1000 delay-200 ${
+              loaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+            }`}
+          >
+            <span className="w-5 sm:w-8 h-[1px] bg-[#C4A87C]" />
+            <span className="text-[9px] sm:text-[11px] tracking-[0.3em] uppercase text-[#C4A87C] font-light">
+              Andes Peruanos · 4,000m
+            </span>
+          </div>
+
+          {/* Headline */}
+          <h1
+            className={`transition-all duration-1000 delay-300 ${
+              loaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
+            }`}
+          >
+            <span className="block font-display text-[clamp(2.4rem,7vw,6.5rem)] text-white/95 font-light leading-[0.95] tracking-[-0.02em]">
+              Alpaca
+            </span>
+            <span className="block font-display italic text-[clamp(2.4rem,7vw,6.5rem)] text-[#C4A87C] font-normal leading-[0.95] tracking-[-0.02em] mt-0.5 sm:mt-1">
+              Premium
+            </span>
+          </h1>
+
+          {/* Tagline */}
+          <p
+            className={`mt-4 sm:mt-6 text-white/70 text-xs sm:text-sm md:text-base font-light tracking-wide max-w-sm sm:max-w-md leading-relaxed transition-all duration-1000 delay-500 ${
+              loaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+            }`}
+          >
+            Piezas únicas tejidas a mano por maestros artesanos.
+          </p>
+
+          {/* CTA */}
+          <div
+            className={`mt-6 sm:mt-8 transition-all duration-1000 delay-700 ${
+              loaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+            }`}
+          >
+            <a
+              href="#coleccion"
+              className="group inline-flex items-center gap-3 text-white/90 hover:text-white transition-all duration-300"
+            >
+              <span className="text-[11px] sm:text-xs tracking-[0.25em] uppercase font-medium">
+                Explorar Colección
               </span>
-            </div>
-
-            {/* Main Headline */}
-            <h1 className="font-display text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl text-[#1C1917] font-light leading-[1.0] tracking-tight mb-6 sm:mb-8">
-              La Nobleza
-              <span className="block font-display italic font-normal text-[#57534E] mt-2">
-                de la Alpaca
-              </span>
-            </h1>
-
-            {/* Story Paragraph */}
-            <p className="text-[#57534E] text-base sm:text-lg lg:text-xl font-light leading-relaxed max-w-xl mb-8 sm:mb-10">
-              Piezas exclusivas tejidas a mano por maestros artesanos en las alturas
-              de los Andes peruanos. Una tradición milenaria que transforma la fibra
-              más suave, cálida y sostenible del mundo en lujo atemporal.
-            </p>
-
-            {/* CTAs */}
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 mb-10 sm:mb-12">
-              <a
-                href="#coleccion"
-                className="px-9 py-4 bg-[#1C1917] text-white hover:bg-[#2F2925] text-xs tracking-[0.24em] uppercase font-medium transition-all duration-300 text-center shadow-sm flex items-center justify-center gap-2 group"
-              >
-                <span>Explorar Colección</span>
-                <ArrowUpRight
+              <span className="flex items-center justify-center w-8 h-8 sm:w-9 sm:h-9 rounded-full border border-white/30 group-hover:border-[#C4A87C] group-hover:bg-[#C4A87C]/15 transition-all duration-300">
+                <ArrowDownRight
                   size={14}
-                  className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                  className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:translate-y-0.5 text-[#C4A87C]"
                 />
-              </a>
-              <a
-                href="#nosotros"
-                className="px-9 py-4 border border-[#1C1917]/30 bg-white/60 hover:bg-white text-[#1C1917] hover:border-[#1C1917] text-xs tracking-[0.24em] uppercase font-medium transition-all duration-300 text-center shadow-xs"
-              >
-                Nuestra Historia
-              </a>
-            </div>
-
-            {/* Micro Provenance Highlights */}
-            <div className="pt-6 border-t border-[#E8E3D8] flex flex-wrap items-center gap-x-6 gap-y-2 text-[#78716C] text-xs tracking-[0.2em] uppercase font-light">
-              <span>Puno & Cusco (+4,000m)</span>
-              <span className="text-[#C7BFB0]">·</span>
-              <span>+500 Familias Artesanas</span>
-              <span className="text-[#C7BFB0]">·</span>
-              <span>Comercio Justo Certificado</span>
-            </div>
+              </span>
+            </a>
           </div>
+        </div>
+      </div>
 
-          {/* Right Column (5 cols): Star Product Visual Showcase */}
-          <div className="lg:col-span-5 flex justify-center lg:justify-end">
-            <div className="w-full max-w-md lg:max-w-none">
-              {/* Product Frame Card */}
-              <div className="relative bg-white border border-[#E2DBD0] p-4 sm:p-5 shadow-lg shadow-[#1C1917]/5 transition-all duration-500 hover:shadow-xl hover:shadow-[#1C1917]/10 group">
-                {/* Floating Artisan Badge */}
-                <div className="absolute top-7 left-7 z-10 bg-[#1C1917]/90 backdrop-blur-md text-white px-3 py-1 text-[10px] tracking-[0.25em] uppercase font-light">
-                  Pieza Destacada
+      {/* ── Bottom Glass Strip (Responsive 3 columns) ── */}
+      <div
+        className={`absolute bottom-0 left-0 right-0 z-20 transition-all duration-1000 delay-700 ${
+          loaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+        }`}
+      >
+        <div className="bg-black/35 backdrop-blur-md border-t border-white/[0.08]">
+          <div className="w-full max-w-[1840px] mx-auto px-2 sm:px-6 lg:px-8">
+            <div className="grid grid-cols-3 divide-x divide-white/[0.08]">
+              {[
+                { value: "100%", label: "Baby Alpaca" },
+                { value: "+500", label: "Familias" },
+                { value: "4,000m", label: "Andes Perú" },
+              ].map((item, i) => (
+                <div
+                  key={i}
+                  className="py-3 sm:py-4 px-2 sm:px-4 text-center"
+                >
+                  <span className="block text-white/95 text-xs sm:text-sm md:text-base font-display font-medium tracking-wide">
+                    {item.value}
+                  </span>
+                  <span className="block text-white/45 text-[8px] sm:text-[10px] tracking-[0.16em] uppercase font-light mt-0.5 truncate">
+                    {item.label}
+                  </span>
                 </div>
-
-                {/* Star Image */}
-                <div className="relative aspect-[4/5] overflow-hidden bg-[#F6F4EE]">
-                  <Image
-                    src="/images/alpaca_poncho.jpg"
-                    alt="Poncho artesanal de alpaca premium hecho a mano"
-                    fill
-                    className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-                    sizes="(max-width: 1024px) 100vw, 40vw"
-                    priority
-                  />
-                </div>
-
-                {/* Caption Details */}
-                <div className="mt-4 pt-3 border-t border-[#F0ECE3] flex items-center justify-between">
-                  <div>
-                    <h3 className="font-display text-base text-[#1C1917] font-medium tracking-tight">
-                      Poncho Andino Ceremonial
-                    </h3>
-                    <p className="text-xs text-[#78716C] font-light tracking-wide mt-0.5">
-                      100% Baby Alpaca · Telar Tradicional
-                    </p>
-                  </div>
-                  <div className="text-right">
-                    <span className="text-sm font-medium text-[#1C1917] block">
-                      S/ 489.00
-                    </span>
-                    <a
-                      href="#coleccion"
-                      className="text-[11px] tracking-wider text-[#78716C] underline underline-offset-4 hover:text-[#1C1917] transition-colors"
-                    >
-                      Ver pieza
-                    </a>
-                  </div>
-                </div>
-              </div>
+              ))}
             </div>
           </div>
         </div>
       </div>
 
-      {/* Bottom Bar: 4 Architectural Columns Across Full Width */}
-      <div className="w-full border-t border-[#E8E3D8] bg-[#F1EFE8]/70">
-        <div className="max-w-[1536px] mx-auto px-6 sm:px-10 lg:px-16 py-8">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
-            {/* Pillar 01 */}
-            <div className="border-l border-[#DDD6C8] pl-5 sm:pl-6">
-              <span className="text-[10px] tracking-[0.3em] uppercase text-[#A8A29E] block mb-1.5 font-mono">
-                01 / PUREZA
-              </span>
-              <h4 className="text-xs sm:text-sm font-medium tracking-[0.16em] uppercase text-[#1C1917] mb-1">
-                100% Baby Alpaca
-              </h4>
-              <p className="text-xs text-[#6B655E] font-light leading-relaxed">
-                7 veces más cálida que la lana tradicional, hipoalergénica y sedosa.
-              </p>
-            </div>
-
-            {/* Pillar 02 */}
-            <div className="border-l border-[#DDD6C8] pl-5 sm:pl-6">
-              <span className="text-[10px] tracking-[0.3em] uppercase text-[#A8A29E] block mb-1.5 font-mono">
-                02 / MAESTRÍA
-              </span>
-              <h4 className="text-xs sm:text-sm font-medium tracking-[0.16em] uppercase text-[#1C1917] mb-1">
-                Tejido Ancestral
-              </h4>
-              <p className="text-xs text-[#6B655E] font-light leading-relaxed">
-                Elaborado en telar de pedal y técnicas heredadas por generaciones.
-              </p>
-            </div>
-
-            {/* Pillar 03 */}
-            <div className="border-l border-[#DDD6C8] pl-5 sm:pl-6">
-              <span className="text-[10px] tracking-[0.3em] uppercase text-[#A8A29E] block mb-1.5 font-mono">
-                03 / COMUNIDAD
-              </span>
-              <h4 className="text-xs sm:text-sm font-medium tracking-[0.16em] uppercase text-[#1C1917] mb-1">
-                Comercio Justo
-              </h4>
-              <p className="text-xs text-[#6B655E] font-light leading-relaxed">
-                Relación directa y pago digno a más de 500 familias altoandinas.
-              </p>
-            </div>
-
-            {/* Pillar 04 */}
-            <div className="border-l border-[#DDD6C8] pl-5 sm:pl-6">
-              <span className="text-[10px] tracking-[0.3em] uppercase text-[#A8A29E] block mb-1.5 font-mono">
-                04 / ORIGEN
-              </span>
-              <h4 className="text-xs sm:text-sm font-medium tracking-[0.16em] uppercase text-[#1C1917] mb-1">
-                Andes Peruanos
-              </h4>
-              <p className="text-xs text-[#6B655E] font-light leading-relaxed">
-                Criadas en libertad a +4,000m. Fibra sostenible y de bajo impacto.
-              </p>
-            </div>
-          </div>
+      {/* ── Scroll Indicator (Hidden on mobile, visible on desktop) ── */}
+      <div
+        className={`absolute bottom-24 right-6 sm:right-8 lg:right-12 z-20 hidden md:flex flex-col items-center gap-2.5 transition-all duration-1000 delay-900 ${
+          loaded ? "opacity-100" : "opacity-0"
+        }`}
+        style={{ opacity: opacity * 0.6 }}
+      >
+        <span className="text-[9px] tracking-[0.25em] uppercase text-white/40 font-light [writing-mode:vertical-lr]">
+          Scroll
+        </span>
+        <div className="w-[1px] h-10 bg-gradient-to-b from-white/30 to-transparent relative overflow-hidden">
+          <div className="absolute top-0 w-full h-3 bg-[#C4A87C] animate-[scrollPulse_2s_ease-in-out_infinite]" />
         </div>
       </div>
+
+      <style jsx>{`
+        @keyframes scrollPulse {
+          0% {
+            transform: translateY(-100%);
+            opacity: 0;
+          }
+          50% {
+            opacity: 1;
+          }
+          100% {
+            transform: translateY(300%);
+            opacity: 0;
+          }
+        }
+      `}</style>
     </section>
   );
 }

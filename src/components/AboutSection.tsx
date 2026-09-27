@@ -33,12 +33,12 @@ const features = [
 
 export default function AboutSection() {
   return (
-    <section id="nosotros" className="py-20 md:py-28 bg-white">
-      <div className="max-w-[1440px] mx-auto px-4 md:px-8">
+    <section id="nosotros" className="py-14 sm:py-20 md:py-28 bg-white overflow-hidden">
+      <div className="w-full max-w-[1840px] mx-auto px-4 sm:px-6 lg:px-8">
         {/* Story section */}
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center mb-24">
+        <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 xl:gap-20 items-center mb-16 sm:mb-24">
           <div className="relative">
-            <div className="relative aspect-[4/5] overflow-hidden">
+            <div className="relative aspect-[4/5] sm:aspect-[4/4] lg:aspect-[4/5] overflow-hidden bg-[#F6F4EE]">
               <Image
                 src="/images/alpaca_poncho.jpg"
                 alt="Artesanía de alpaca"
@@ -47,29 +47,27 @@ export default function AboutSection() {
                 sizes="(max-width: 1024px) 100vw, 50vw"
               />
             </div>
-            {/* Floating card */}
-            <div className="absolute -bottom-6 -right-6 md:-right-8 glass-card p-6 max-w-[220px] animate-float">
-              <p className="text-3xl font-display font-bold text-brand-600 mb-1">
+            {/* Floating card - responsive positioning */}
+            <div className="absolute bottom-3 right-3 sm:-bottom-6 sm:-right-6 bg-white/95 backdrop-blur-md border border-[#EAE5DC] p-4 sm:p-6 max-w-[180px] sm:max-w-[220px] shadow-lg">
+              <p className="text-2xl sm:text-3xl font-display font-medium text-[#1C1917] mb-0.5 sm:mb-1">
                 +500
               </p>
-              <p className="text-xs text-earth-600 tracking-wide">
+              <p className="text-[11px] sm:text-xs text-stone-600 font-light leading-snug">
                 Familias artesanas en nuestra comunidad
               </p>
             </div>
           </div>
 
           <div>
-            <span className="text-[11px] tracking-[0.4em] uppercase text-brand-600 mb-4 block">
+            <span className="text-[10px] sm:text-[11px] tracking-[0.35em] uppercase text-[#8C7A6B] mb-2 sm:mb-3 block font-light">
               Nuestra Historia
             </span>
-            <h2 className="section-title mb-6">
+            <h2 className="font-display text-2xl sm:text-4xl lg:text-5xl text-[#1C1917] font-light leading-tight mb-4 sm:mb-6">
               Tradición que se
               <br />
-              <span className="font-display italic font-normal">
-                teje con el alma
-              </span>
+              <span className="italic font-normal">teje con el alma</span>
             </h2>
-            <div className="space-y-4 text-earth-600 font-light leading-relaxed">
+            <div className="space-y-3 sm:space-y-4 text-stone-600 text-sm sm:text-base font-light leading-relaxed">
               <p>
                 KAR nace de un profundo respeto por la tradición textil andina.
                 Nuestro nombre representa la esencia de la artesanía peruana, y cada pieza que
@@ -89,30 +87,34 @@ export default function AboutSection() {
                 más ligera que el cashmere.
               </p>
             </div>
-            <a href="#" className="btn-primary mt-8">
-              Conoce Más
-            </a>
+            <div className="mt-6 sm:mt-8">
+              <a
+                href="#coleccion"
+                className="inline-flex items-center justify-center px-7 sm:px-9 py-3 sm:py-3.5 bg-[#1C1917] text-white hover:bg-black text-xs tracking-[0.22em] uppercase font-medium transition-colors"
+              >
+                Explorar Colección
+              </a>
+            </div>
           </div>
         </div>
 
-        {/* Features grid */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
-          {features.map((feature, idx) => (
+        {/* Features grid: 2 cols on mobile, 4 on desktop */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8 pt-8 border-t border-[#EAE5DC]">
+          {features.map((feature) => (
             <div
               key={feature.title}
-              className="text-center group p-6 hover:bg-earth-50 rounded-sm transition-all duration-500"
-              style={{ animationDelay: `${idx * 0.1}s` }}
+              className="text-left sm:text-center p-3 sm:p-5 hover:bg-stone-50 transition-colors"
             >
-              <div className="w-14 h-14 mx-auto mb-5 flex items-center justify-center border border-earth-200 rounded-full group-hover:border-brand-300 group-hover:bg-brand-50 transition-all duration-500">
+              <div className="w-10 h-10 sm:w-12 sm:h-12 sm:mx-auto mb-3 sm:mb-4 flex items-center justify-center border border-stone-200 rounded-full bg-stone-50">
                 <feature.icon
-                  size={22}
-                  className="text-earth-500 group-hover:text-brand-600 transition-colors duration-500"
+                  size={18}
+                  className="text-[#8C7A6B]"
                 />
               </div>
-              <h3 className="text-sm font-semibold tracking-wider uppercase text-earth-900 mb-3">
+              <h3 className="text-xs sm:text-sm font-medium tracking-wider uppercase text-[#1C1917] mb-1 sm:mb-2">
                 {feature.title}
               </h3>
-              <p className="text-xs text-earth-500 leading-relaxed font-light">
+              <p className="text-[11px] sm:text-xs text-stone-500 leading-relaxed font-light line-clamp-3 sm:line-clamp-none">
                 {feature.description}
               </p>
             </div>

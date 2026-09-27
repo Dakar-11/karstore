@@ -3,6 +3,7 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 
 const collections = [
   {
@@ -27,45 +28,47 @@ const collections = [
 
 export default function FeaturedCategories() {
   return (
-    <section className="py-16 md:py-24 bg-earth-100/50">
-      <div className="max-w-[1440px] mx-auto px-4 md:px-8">
-        <div className="text-center mb-12">
-          <span className="text-[11px] tracking-[0.4em] uppercase text-brand-600 mb-3 block">
-            Colecciones
+    <section className="py-12 sm:py-16 md:py-24 bg-[#FBF9F6] border-y border-[#EAE5DC]">
+      <div className="w-full max-w-[1840px] mx-auto px-3 sm:px-6 lg:px-8">
+        {/* Section Header */}
+        <div className="text-center mb-8 sm:mb-12">
+          <span className="text-[10px] sm:text-[11px] tracking-[0.35em] uppercase text-[#8C7A6B] mb-2 block font-light">
+            Colecciones Destacadas
           </span>
-          <h2 className="section-title">Explora por Categoría</h2>
+          <h2 className="font-display text-2xl sm:text-3xl md:text-4xl font-light text-[#1C1917] tracking-tight">
+            Explora por Categoría
+          </h2>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-4 md:gap-6">
+        {/* Responsive Grid: 1 col on mobile, 3 cols on tablet/desktop */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-4 md:gap-6">
           {collections.map((col, idx) => (
             <Link
               key={col.title}
               href={col.href}
-              className="group relative overflow-hidden aspect-[3/4] block animate-fade-in-up"
-              style={{ animationDelay: `${idx * 0.15}s` }}
+              className="group relative overflow-hidden aspect-[4/3] sm:aspect-[4/5] md:aspect-[3/4] block bg-[#F6F4EE]"
             >
               <Image
                 src={col.image}
                 alt={col.title}
                 fill
-                className="object-cover transition-transform duration-700 group-hover:scale-105"
+                className="object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105"
                 sizes="(max-width: 768px) 100vw, 33vw"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
-              <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8">
-                <p className="text-white/70 text-[10px] tracking-[0.3em] uppercase mb-2">
+              <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/20 to-transparent" />
+              <div className="absolute bottom-0 left-0 right-0 p-5 sm:p-6 md:p-8">
+                <p className="text-white/70 text-[9px] sm:text-[10px] tracking-[0.25em] uppercase mb-1.5 font-light">
                   {col.subtitle}
                 </p>
-                <h3 className="text-white text-xl md:text-2xl font-display font-medium">
+                <h3 className="text-white text-lg sm:text-xl md:text-2xl font-display font-medium mb-3">
                   {col.title}
                 </h3>
-                <div className="mt-4 flex items-center gap-2 text-white/80 group-hover:text-white transition-colors">
-                  <span className="text-xs tracking-[0.2em] uppercase">
-                    Ver colección
-                  </span>
-                  <span className="transition-transform group-hover:translate-x-1">
-                    →
-                  </span>
+                <div className="inline-flex items-center gap-2 text-white/90 group-hover:text-white transition-colors text-[11px] sm:text-xs tracking-[0.2em] uppercase font-medium">
+                  <span>Ver colección</span>
+                  <ArrowRight
+                    size={14}
+                    className="transition-transform duration-300 group-hover:translate-x-1"
+                  />
                 </div>
               </div>
             </Link>

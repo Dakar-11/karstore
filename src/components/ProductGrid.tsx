@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { SlidersHorizontal, ChevronDown, Grid3X3, LayoutGrid } from "lucide-react";
+import { ChevronDown, Grid3X3, LayoutGrid, Check } from "lucide-react";
 import ProductCard from "./ProductCard";
 import { products as initialProducts } from "@/lib/products";
 import { Product } from "@/context/CartContext";
@@ -10,7 +10,7 @@ export default function ProductGrid() {
   const [productList, setProductList] = useState<Product[]>(initialProducts);
   const [activeCategory, setActiveCategory] = useState("todos");
   const [sortBy, setSortBy] = useState("featured");
-  const [gridCols, setGridCols] = useState(4);
+  const [gridCols, setGridCols] = useState<3 | 4>(4);
   const [showSort, setShowSort] = useState(false);
 
   useEffect(() => {
@@ -75,106 +75,122 @@ export default function ProductGrid() {
     }
   });
 
+  const sortOptions = [
+    { value: "featured", label: "Destacados" },
+    { value: "price-asc", label: "Precio: Menor a Mayor" },
+    { value: "price-desc", label: "Precio: Mayor a Menor" },
+    { value: "name", label: "Nombre: A - Z" },
+  ];
+
   return (
-    <section id="coleccion" className="py-16 md:py-24">
-      <div className="max-w-[1440px] mx-auto px-4 md:px-8">
-        {/* Section header */}
-        <div className="text-center mb-12">
-          <span className="text-[11px] tracking-[0.4em] uppercase text-brand-600 mb-3 block">
-            Catálogo
-          </span>
-          <h2 className="section-title mb-4">Nuestra Colección</h2>
-          <p className="section-subtitle mx-auto">
-            Cada pieza es única, tejida a mano por artesanos que heredaron el
-            arte ancestral de trabajar la fibra de alpaca.
-          </p>
+    <section id="coleccion" className="py-10 sm:py-16 bg-white">
+      {/* Full-width container like KUNA to maximize photo size */}
+      <div className="w-full max-w-[1840px] mx-auto px-3 sm:px-6 lg:px-8">
+        {/* KUNA Header Bar: Category title + clean divider */}
+        <div className="mb-3">
+          <div className="flex items-center gap-2 text-[11px] sm:text-xs tracking-[0.24em] uppercase text-[#78716C] font-light">
+            <span>KAR</span>
+            <span className="text-[#C7BFB0]">|</span>
+            <span className="text-[#1C1917] font-medium tracking-[0.2em]">
+              {activeCategory === "todos" ? "COLECCIÓN PERUANA" : activeCategory}
+            </span>
+          </div>
         </div>
 
-        {/* Category tabs */}
-        <div className="flex items-center gap-1 overflow-x-auto pb-4 mb-8 border-b border-earth-200 scrollbar-hide">
-          {dynamicCategories.map((cat) => (
-            <button
-              key={cat.slug}
-              onClick={() => setActiveCategory(cat.slug)}
-              className={`flex-shrink-0 px-4 py-2 text-[11px] tracking-[0.15em] uppercase font-medium transition-all duration-300 border-b-2 -mb-[1px] ${
-                activeCategory === cat.slug
-                  ? "border-earth-950 text-earth-950"
-                  : "border-transparent text-earth-400 hover:text-earth-700"
-              }`}
-            >
-              {cat.name}
-              <span className="ml-1 text-earth-300">({cat.count})</span>
-            </button>
-          ))}
+        {/* Categories Bar (horizontal tabs) */}
+        <div className="flex items-center gap-4 sm:gap-6 overflow-x-auto pb-2.5 pt-1 scrollbar-hide border-b border-[#EAE5DC]">
+          {dynamicCategories.map((cat) => {
+            const isActive = activeCategory === cat.slug;
+            return (
+              <button
+                key={cat.slug}
+                onClick={() => setActiveCategory(cat.slug)}
+                className={`flex-shrink-0 text-xs sm:text-[13px] tracking-[0.14em] uppercase transition-all duration-200 py-1 relative ${
+                  isActive
+                    ? "text-[#1C1917] font-semibold after:absolute after:bottom-0 after:left-0 after:right-0 after:h-[2px] after:bg-[#1C1917]"
+                    : "text-[#78716C] hover:text-[#1C1917] font-normal"
+                }`}
+              >
+                {cat.name}
+                <span className="ml-1 text-[10px] text-[#A8A29E] font-light">
+                  ({cat.count})
+                </span>
+              </button>
+            );
+          })}
         </div>
 
-        {/* Toolbar */}
-        <div className="flex items-center justify-between mb-8">
-          <p className="text-sm text-earth-500">
-            <span className="font-medium text-earth-800">
-              {sortedProducts.length}
-            </span>{" "}
-            productos
-          </p>
+        {/* KUNA Count & Filter Bar */}
+        <div className="flex items-center justify-between py-3.5 border-b border-[#EAE5DC] mb-6 sm:mb-8">
+          {/* Left: Product count */}
+          <div className="text-[11px] sm:text-xs tracking-[0.24em] uppercase text-[#78716C] font-medium">
+            <span className="text-[#1C1917] font-semibold">{sortedProducts.length}</span>{" "}
+            {sortedProducts.length === 1 ? "PRODUCTO" : "PRODUCTOS"}
+          </div>
 
-          <div className="flex items-center gap-4">
-            {/* Grid toggle */}
-            <div className="hidden md:flex items-center gap-2 border-r border-earth-200 pr-4">
+          {/* Right: Grid Switcher + Filter Dropdown */}
+          <div className="flex items-center gap-5 sm:gap-6">
+            {/* View Switcher (Desktop only) */}
+            <div className="hidden lg:flex items-center gap-2 border-r border-[#EAE5DC] pr-5 text-[#78716C]">
               <button
                 onClick={() => setGridCols(3)}
-                className={`p-1 transition-colors ${
-                  gridCols === 3 ? "text-earth-950" : "text-earth-300"
+                className={`p-1.5 transition-colors ${
+                  gridCols === 3 ? "text-[#1C1917]" : "text-[#C7BFB0] hover:text-[#78716C]"
                 }`}
+                title="Vista 3 columnas (Grandes)"
+                aria-label="3 columnas"
               >
                 <Grid3X3 size={18} />
               </button>
               <button
                 onClick={() => setGridCols(4)}
-                className={`p-1 transition-colors ${
-                  gridCols === 4 ? "text-earth-950" : "text-earth-300"
+                className={`p-1.5 transition-colors ${
+                  gridCols === 4 ? "text-[#1C1917]" : "text-[#C7BFB0] hover:text-[#78716C]"
                 }`}
+                title="Vista 4 columnas"
+                aria-label="4 columnas"
               >
                 <LayoutGrid size={18} />
               </button>
             </div>
 
-            {/* Sort */}
+            {/* Sort & Filter Dropdown (KUNA Style) */}
             <div className="relative">
               <button
                 onClick={() => setShowSort(!showSort)}
-                className="flex items-center gap-2 text-xs tracking-wider uppercase text-earth-700 hover:text-earth-950 transition-colors"
+                className="flex items-center gap-2 text-[11px] sm:text-xs tracking-[0.2em] uppercase text-[#1C1917] hover:text-[#8C7A6B] font-medium transition-colors"
               >
-                <SlidersHorizontal size={14} />
-                Filtrar & Ordenar
+                <span>FILTRAR & ORDENAR</span>
                 <ChevronDown
                   size={14}
-                  className={`transition-transform ${
+                  className={`transition-transform duration-300 text-[#78716C] ${
                     showSort ? "rotate-180" : ""
                   }`}
                 />
               </button>
 
               {showSort && (
-                <div className="absolute right-0 top-full mt-2 w-52 bg-white shadow-xl border border-earth-100 py-2 z-20 animate-scale-in">
-                  {[
-                    { value: "featured", label: "Destacados" },
-                    { value: "price-asc", label: "Precio: Menor a Mayor" },
-                    { value: "price-desc", label: "Precio: Mayor a Menor" },
-                    { value: "name", label: "Nombre A-Z" },
-                  ].map((option) => (
+                <div className="absolute right-0 top-full mt-2 w-56 bg-white shadow-xl border border-[#EAE5DC] py-2 z-30 animate-scale-in">
+                  <div className="px-4 py-2 border-b border-[#F5F2EB] text-[10px] tracking-[0.25em] uppercase text-[#A8A29E] font-medium">
+                    Ordenar catálogo
+                  </div>
+                  {sortOptions.map((option) => (
                     <button
                       key={option.value}
                       onClick={() => {
                         setSortBy(option.value);
                         setShowSort(false);
                       }}
-                      className={`w-full text-left px-4 py-2.5 text-xs tracking-wide transition-colors ${
+                      className={`w-full text-left px-4 py-2.5 text-xs tracking-wider uppercase transition-colors flex items-center justify-between ${
                         sortBy === option.value
-                          ? "bg-earth-50 text-brand-700 font-medium"
-                          : "text-earth-600 hover:bg-earth-50"
+                          ? "bg-[#F7F5F0] text-[#1C1917] font-semibold"
+                          : "text-[#57534E] hover:bg-[#FAF8F5] hover:text-[#1C1917]"
                       }`}
                     >
-                      {option.label}
+                      <span>{option.label}</span>
+                      {sortBy === option.value && (
+                        <Check size={13} className="text-[#1C1917]" />
+                      )}
                     </button>
                   ))}
                 </div>
@@ -183,31 +199,31 @@ export default function ProductGrid() {
           </div>
         </div>
 
-        {/* Product grid */}
+        {/* Product Grid (KUNA Style: minimal gap, big imposing photos) */}
         <div
-          className={`grid gap-4 md:gap-6 ${
+          className={`grid grid-cols-2 ${
             gridCols === 3
-              ? "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
-              : "grid-cols-1 sm:grid-cols-2 lg:grid-cols-4"
-          }`}
+              ? "md:grid-cols-3"
+              : "md:grid-cols-3 lg:grid-cols-4"
+          } gap-x-2 sm:gap-x-3 lg:gap-x-4 gap-y-7 sm:gap-y-10`}
         >
-          {sortedProducts.map((product, idx) => (
-            <div
-              key={product.id}
-              className="animate-fade-in-up"
-              style={{ animationDelay: `${idx * 0.08}s` }}
-            >
-              <ProductCard product={product} />
-            </div>
+          {sortedProducts.map((product) => (
+            <ProductCard key={product.id} product={product} />
           ))}
         </div>
 
         {/* Empty state */}
         {sortedProducts.length === 0 && (
-          <div className="text-center py-20">
-            <p className="text-earth-400 text-lg">
-              No hay productos en esta categoría
+          <div className="text-center py-24 bg-[#FAF8F5] mt-6 border border-[#EAE5DC]">
+            <p className="text-[#78716C] text-sm tracking-widest uppercase">
+              No hay productos disponibles en esta categoría
             </p>
+            <button
+              onClick={() => setActiveCategory("todos")}
+              className="mt-4 px-6 py-2 bg-[#1C1917] text-white text-xs tracking-widest uppercase hover:bg-black transition-colors"
+            >
+              Ver todos los productos
+            </button>
           </div>
         )}
       </div>

@@ -8,7 +8,7 @@ import CartPanel from "@/components/CartPanel";
 import ProductCard from "@/components/ProductCard";
 import Newsletter from "@/components/Newsletter";
 import { Product } from "@/context/CartContext";
-import { SlidersHorizontal, ChevronDown, Grid3X3, LayoutGrid, Sparkles, Feather, ShieldCheck, ArrowRight } from "lucide-react";
+import { ChevronDown, Grid3X3, LayoutGrid, ArrowRight, Check } from "lucide-react";
 
 export interface CollectionConfig {
   slug: "mujer" | "hombre" | "alfombras" | "accesorios" | "pieles-curtidas";
@@ -75,7 +75,7 @@ export default function CollectionTemplate({ config }: { config: CollectionConfi
   const [loading, setLoading] = useState(true);
   const [activeSubFilter, setActiveSubFilter] = useState("todos");
   const [sortBy, setSortBy] = useState("featured");
-  const [gridCols, setGridCols] = useState(4);
+  const [gridCols, setGridCols] = useState<3 | 4>(4);
   const [showSort, setShowSort] = useState(false);
 
   useEffect(() => {
@@ -119,150 +119,134 @@ export default function CollectionTemplate({ config }: { config: CollectionConfi
     }
   });
 
+  const sortOptions = [
+    { value: "featured", label: "Destacados" },
+    { value: "price-asc", label: "Precio: Menor a Mayor" },
+    { value: "price-desc", label: "Precio: Mayor a Menor" },
+    { value: "name", label: "Nombre: A - Z" },
+  ];
+
   return (
     <>
       <Header />
-      <main className="bg-[#FAF8F5] min-h-screen">
-        {/* Editorial Collection Hero Banner */}
-        <section className="relative bg-[#F5F2EB] border-b border-[#E5E0D5] py-14 sm:py-20 md:py-24">
-          <div className="max-w-[1536px] mx-auto px-4 sm:px-8 lg:px-16">
-            {/* Breadcrumb */}
-            <div className="flex items-center gap-2 text-[10px] sm:text-[11px] tracking-[0.25em] uppercase text-[#78716C] mb-6">
-              <Link href="/" className="hover:text-[#1C1917] transition-colors">
-                Inicio
-              </Link>
-              <span>/</span>
-              <span>Colecciones</span>
-              <span>/</span>
-              <span className="text-[#1C1917] font-medium">{config.name}</span>
-            </div>
-
-            <div className="grid lg:grid-cols-12 gap-8 lg:gap-16 items-end">
-              {/* Left Column: Big Editorial Title */}
-              <div className="lg:col-span-8">
-                <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-[#DDD6C8] bg-white/70 text-[#78716C] text-[10px] sm:text-[11px] tracking-[0.3em] uppercase mb-5 w-fit">
-                  <Sparkles size={12} className="text-[#8C7A6B]" />
-                  <span>{config.pretitle}</span>
-                </div>
-                <h1 className="font-display text-4xl sm:text-6xl md:text-7xl lg:text-8xl text-[#1C1917] font-light leading-[1.02] tracking-tight mb-5">
-                  {config.title}
-                </h1>
-                <p className="text-[#57534E] text-base sm:text-lg lg:text-xl font-light leading-relaxed max-w-2xl">
-                  {config.description}
-                </p>
-              </div>
-
-              {/* Right Column: Highlights pills */}
-              <div className="lg:col-span-4 flex flex-col justify-end">
-                <div className="p-6 bg-white/80 border border-[#E5E0D5] rounded-sm backdrop-blur-xs">
-                  <span className="text-[10px] tracking-[0.25em] uppercase text-[#78716C] block mb-3 font-medium">
-                    Compromiso Artesanal
-                  </span>
-                  <ul className="space-y-2.5">
-                    {config.highlights.map((highlight, idx) => (
-                      <li key={idx} className="flex items-center gap-2.5 text-xs text-[#1C1917] font-light">
-                        <Feather size={14} className="text-[#8C7A6B] flex-shrink-0" />
-                        <span>{highlight}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+      <main className="bg-white min-h-screen pt-20">
+        {/* KUNA-style Collection Products Section */}
+        <section className="py-6 sm:py-10">
+          <div className="w-full max-w-[1840px] mx-auto px-3 sm:px-6 lg:px-8">
+            {/* KUNA Header Bar: Category title + clean divider */}
+            <div className="mb-3">
+              <div className="flex items-center gap-2 text-[11px] sm:text-xs tracking-[0.24em] uppercase text-[#78716C] font-light">
+                <Link href="/" className="hover:text-[#1C1917] transition-colors">
+                  KAR
+                </Link>
+                <span className="text-[#C7BFB0]">|</span>
+                <span className="text-[#1C1917] font-medium tracking-[0.2em]">
+                  {config.name.toUpperCase()}
+                  {activeSubFilter !== "todos" ? ` · ${activeSubFilter.toUpperCase()}` : ""}
+                </span>
               </div>
             </div>
-          </div>
-        </section>
 
-        {/* Collection Products Section */}
-        <section className="py-12 sm:py-16 md:py-20">
-          <div className="max-w-[1536px] mx-auto px-4 sm:px-8 lg:px-16">
-            {/* Category tabs */}
-            <div className="flex items-center gap-2 overflow-x-auto pb-4 mb-8 border-b border-[#E5E0D5] scrollbar-hide">
-              {subCategories.map((subCat) => {
-                const count =
-                  subCat === "todos"
-                    ? products.length
-                    : products.filter((p) => p.category.toLowerCase() === subCat).length;
-                return (
-                  <button
-                    key={subCat}
-                    onClick={() => setActiveSubFilter(subCat)}
-                    className={`flex-shrink-0 px-4 py-2 text-[11px] tracking-[0.18em] uppercase font-medium transition-all duration-300 border-b-2 -mb-[17px] ${
-                      activeSubFilter === subCat
-                        ? "border-[#1C1917] text-[#1C1917]"
-                        : "border-transparent text-[#78716C] hover:text-[#1C1917]"
-                    }`}
-                  >
-                    {subCat === "todos" ? "Todos" : subCat}
-                    <span className="ml-1 text-[#A8A29E]">({count})</span>
-                  </button>
-                );
-              })}
-            </div>
+            {/* Subcategories Bar (horizontal tabs) */}
+            {subCategories.length > 2 && (
+              <div className="flex items-center gap-4 sm:gap-6 overflow-x-auto pb-2.5 pt-1 scrollbar-hide border-b border-[#EAE5DC]">
+                {subCategories.map((subCat) => {
+                  const count =
+                    subCat === "todos"
+                      ? products.length
+                      : products.filter((p) => p.category.toLowerCase() === subCat).length;
+                  const isActive = activeSubFilter === subCat;
+                  return (
+                    <button
+                      key={subCat}
+                      onClick={() => setActiveSubFilter(subCat)}
+                      className={`flex-shrink-0 text-xs sm:text-[13px] tracking-[0.14em] uppercase transition-all duration-200 py-1 relative ${
+                        isActive
+                          ? "text-[#1C1917] font-semibold after:absolute after:bottom-0 after:left-0 after:right-0 after:h-[2px] after:bg-[#1C1917]"
+                          : "text-[#78716C] hover:text-[#1C1917] font-normal"
+                      }`}
+                    >
+                      {subCat === "todos" ? "Todos" : subCat}
+                      <span className="ml-1 text-[10px] text-[#A8A29E] font-light">
+                        ({count})
+                      </span>
+                    </button>
+                  );
+                })}
+              </div>
+            )}
 
-            {/* Toolbar: Counter, Layout Toggle, Sort */}
-            <div className="flex flex-wrap items-center justify-between gap-4 mb-10 pb-4">
-              <p className="text-xs sm:text-sm text-[#78716C]">
-                Mostrando <span className="font-semibold text-[#1C1917]">{sortedProducts.length}</span> piezas exclusivas
-              </p>
+            {/* KUNA Minimalist Sub-Header: Count + Filter Controls */}
+            <div className="flex items-center justify-between py-3.5 border-b border-[#EAE5DC] mb-6 sm:mb-8">
+              {/* Left: Product count */}
+              <div className="text-[11px] sm:text-xs tracking-[0.24em] uppercase text-[#78716C] font-medium">
+                <span className="text-[#1C1917] font-semibold">{sortedProducts.length}</span>{" "}
+                {sortedProducts.length === 1 ? "PIEZA" : "PIEZAS"}
+              </div>
 
-              <div className="flex items-center gap-4">
-                {/* Grid columns toggle (Desktop) */}
-                <div className="hidden md:flex items-center gap-1 border border-[#DDD6C8] p-0.5 rounded-sm bg-white">
+              {/* Right: Grid Switcher + Filter Dropdown */}
+              <div className="flex items-center gap-5 sm:gap-6">
+                {/* View Switcher (Desktop only) */}
+                <div className="hidden lg:flex items-center gap-2 border-r border-[#EAE5DC] pr-5 text-[#78716C]">
                   <button
                     onClick={() => setGridCols(3)}
-                    className={`p-1.5 rounded-xs transition-colors ${
-                      gridCols === 3 ? "bg-[#1C1917] text-white" : "text-[#78716C] hover:text-[#1C1917]"
+                    className={`p-1.5 transition-colors ${
+                      gridCols === 3 ? "text-[#1C1917]" : "text-[#C7BFB0] hover:text-[#78716C]"
                     }`}
-                    title="Vista 3 columnas"
+                    title="Vista 3 columnas (Grandes)"
+                    aria-label="3 columnas"
                   >
-                    <Grid3X3 size={15} />
+                    <Grid3X3 size={18} />
                   </button>
                   <button
                     onClick={() => setGridCols(4)}
-                    className={`p-1.5 rounded-xs transition-colors ${
-                      gridCols === 4 ? "bg-[#1C1917] text-white" : "text-[#78716C] hover:text-[#1C1917]"
+                    className={`p-1.5 transition-colors ${
+                      gridCols === 4 ? "text-[#1C1917]" : "text-[#C7BFB0] hover:text-[#78716C]"
                     }`}
                     title="Vista 4 columnas"
+                    aria-label="4 columnas"
                   >
-                    <LayoutGrid size={15} />
+                    <LayoutGrid size={18} />
                   </button>
                 </div>
 
-                {/* Sort dropdown */}
+                {/* Sort & Filter Dropdown (KUNA Style) */}
                 <div className="relative">
                   <button
                     onClick={() => setShowSort(!showSort)}
-                    className="flex items-center gap-2 px-3.5 py-2 border border-[#DDD6C8] bg-white rounded-sm text-xs font-medium text-[#1C1917] hover:border-[#1C1917] transition-colors"
+                    className="flex items-center gap-2 text-[11px] sm:text-xs tracking-[0.2em] uppercase text-[#1C1917] hover:text-[#8C7A6B] font-medium transition-colors"
                   >
-                    <SlidersHorizontal size={13} />
-                    <span>
-                      {sortBy === "featured" && "Destacados"}
-                      {sortBy === "price-asc" && "Precio: Menor a Mayor"}
-                      {sortBy === "price-desc" && "Precio: Mayor a Menor"}
-                      {sortBy === "name" && "Nombre: A - Z"}
-                    </span>
-                    <ChevronDown size={14} />
+                    <span>FILTRAR & ORDENAR</span>
+                    <ChevronDown
+                      size={14}
+                      className={`transition-transform duration-300 text-[#78716C] ${
+                        showSort ? "rotate-180" : ""
+                      }`}
+                    />
                   </button>
 
                   {showSort && (
-                    <div className="absolute right-0 top-full mt-1.5 w-52 bg-white border border-[#DDD6C8] shadow-xl rounded-sm py-1.5 z-20 animate-scale-in text-xs">
-                      {[
-                        { label: "Destacados", value: "featured" },
-                        { label: "Precio: Menor a Mayor", value: "price-asc" },
-                        { label: "Precio: Mayor a Menor", value: "price-desc" },
-                        { label: "Nombre: A - Z", value: "name" },
-                      ].map((opt) => (
+                    <div className="absolute right-0 top-full mt-2 w-56 bg-white shadow-xl border border-[#EAE5DC] py-2 z-30 animate-scale-in">
+                      <div className="px-4 py-2 border-b border-[#F5F2EB] text-[10px] tracking-[0.25em] uppercase text-[#A8A29E] font-medium">
+                        Ordenar colección
+                      </div>
+                      {sortOptions.map((option) => (
                         <button
-                          key={opt.value}
+                          key={option.value}
                           onClick={() => {
-                            setSortBy(opt.value);
+                            setSortBy(option.value);
                             setShowSort(false);
                           }}
-                          className={`w-full text-left px-4 py-2 hover:bg-[#FAF8F5] transition-colors ${
-                            sortBy === opt.value ? "font-semibold text-[#1C1917] bg-[#FAF8F5]" : "text-[#57534E]"
+                          className={`w-full text-left px-4 py-2.5 text-xs tracking-wider uppercase transition-colors flex items-center justify-between ${
+                            sortBy === option.value
+                              ? "bg-[#F7F5F0] text-[#1C1917] font-semibold"
+                              : "text-[#57534E] hover:bg-[#FAF8F5] hover:text-[#1C1917]"
                           }`}
                         >
-                          {opt.label}
+                          <span>{option.label}</span>
+                          {sortBy === option.value && (
+                            <Check size={13} className="text-[#1C1917]" />
+                          )}
                         </button>
                       ))}
                     </div>
@@ -271,30 +255,32 @@ export default function CollectionTemplate({ config }: { config: CollectionConfi
               </div>
             </div>
 
-            {/* Products Grid */}
+            {/* Products Grid (KUNA Style: minimal gap, big imposing photos) */}
             {loading ? (
-              <div className="py-24 text-center">
+              <div className="py-32 text-center">
                 <div className="w-8 h-8 border-2 border-[#1C1917] border-t-transparent rounded-full animate-spin mx-auto mb-4" />
                 <p className="text-xs uppercase tracking-widest text-[#78716C]">Cargando colección...</p>
               </div>
             ) : sortedProducts.length === 0 ? (
-              <div className="py-20 text-center bg-white border border-[#E5E0D5] p-12">
-                <h3 className="font-display text-xl text-[#1C1917] mb-2">No hay piezas en esta subcategoría</h3>
+              <div className="py-24 text-center bg-[#FAF8F5] border border-[#EAE5DC]">
+                <h3 className="font-display text-lg text-[#1C1917] mb-2">No hay piezas en esta selección</h3>
                 <p className="text-xs text-[#78716C] mb-6">
                   Explora todas las piezas de la colección {config.name}.
                 </p>
                 <button
                   onClick={() => setActiveSubFilter("todos")}
-                  className="px-6 py-2.5 bg-[#1C1917] text-white text-xs uppercase tracking-widest font-medium"
+                  className="px-6 py-2.5 bg-[#1C1917] text-white text-xs uppercase tracking-widest font-medium hover:bg-black transition-colors"
                 >
-                  Ver Todos
+                  Ver Todas las Piezas
                 </button>
               </div>
             ) : (
               <div
-                className={`grid grid-cols-1 sm:grid-cols-2 ${
-                  gridCols === 3 ? "lg:grid-cols-3" : "lg:grid-cols-4"
-                } gap-6 md:gap-8`}
+                className={`grid grid-cols-2 ${
+                  gridCols === 3
+                    ? "md:grid-cols-3"
+                    : "md:grid-cols-3 lg:grid-cols-4"
+                } gap-x-2 sm:gap-x-3 lg:gap-x-4 gap-y-7 sm:gap-y-10`}
               >
                 {sortedProducts.map((product) => (
                   <ProductCard key={product.id} product={product} />
@@ -304,34 +290,34 @@ export default function CollectionTemplate({ config }: { config: CollectionConfi
           </div>
         </section>
 
-        {/* Specialized Artisan Story Section */}
-        <section className="py-16 sm:py-24 bg-white border-t border-[#E5E0D5]">
-          <div className="max-w-[1536px] mx-auto px-4 sm:px-8 lg:px-16">
-            <div className="grid lg:grid-cols-12 gap-12 items-center">
+        {/* Specialized Artisan Story Section at the bottom */}
+        <section className="py-16 sm:py-20 bg-[#FBF9F6] border-t border-[#EAE5DC]">
+          <div className="max-w-[1536px] mx-auto px-4 sm:px-8 lg:px-12">
+            <div className="grid lg:grid-cols-12 gap-10 items-center">
               <div className="lg:col-span-7">
-                <span className="text-[11px] tracking-[0.35em] uppercase text-[#78716C] mb-3 block font-light">
+                <span className="text-[11px] tracking-[0.32em] uppercase text-[#78716C] mb-3 block font-light">
                   {config.craftStory.subtitle}
                 </span>
-                <h2 className="font-display text-3xl sm:text-5xl text-[#1C1917] font-light leading-tight mb-6">
+                <h2 className="font-display text-2xl sm:text-4xl text-[#1C1917] font-light leading-tight mb-4">
                   {config.craftStory.title}
                 </h2>
-                <p className="text-[#57534E] text-base leading-relaxed font-light mb-8 max-w-xl">
+                <p className="text-[#57534E] text-sm sm:text-base leading-relaxed font-light mb-6 max-w-xl">
                   {config.craftStory.text}
                 </p>
                 <div className="flex items-center gap-6">
                   <div className="border-l-2 border-[#1C1917] pl-4">
-                    <p className="text-3xl font-display font-medium text-[#1C1917]">{config.craftStory.stat}</p>
-                    <p className="text-[11px] text-[#78716C] uppercase tracking-wider">{config.craftStory.statLabel}</p>
+                    <p className="text-2xl font-display font-medium text-[#1C1917]">{config.craftStory.stat}</p>
+                    <p className="text-[10px] text-[#78716C] uppercase tracking-wider">{config.craftStory.statLabel}</p>
                   </div>
                   <div className="border-l-2 border-[#DDD6C8] pl-4">
                     <p className="text-xs uppercase tracking-wider text-[#1C1917] font-medium">{config.craftStory.artisanOrigin}</p>
-                    <p className="text-[11px] text-[#78716C]">Origen Certificado</p>
+                    <p className="text-[10px] text-[#78716C]">Origen Certificado</p>
                   </div>
                 </div>
               </div>
 
-              <div className="lg:col-span-5 bg-[#FAF8F5] p-8 border border-[#E5E0D5]">
-                <h3 className="font-display text-xl text-[#1C1917] mb-3">¿Buscas pedidos especiales o tallas a medida?</h3>
+              <div className="lg:col-span-5 bg-white p-8 border border-[#EAE5DC]">
+                <h3 className="font-display text-lg text-[#1C1917] mb-2">¿Buscas pedidos especiales o a medida?</h3>
                 <p className="text-xs text-[#57534E] font-light leading-relaxed mb-6">
                   Elaboramos piezas personalizadas para proyectos de arquitectura, mayoristas y coleccionistas en todo el mundo.
                 </p>
